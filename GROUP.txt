@@ -1,9 +1,13 @@
 Add usernames, student numbers, indiv contributions to project
 
-Adam Basile (<STUDENT NUMBER>)
-- Feature 1
-- Feature 2
+> Adam Basile (<STUDENT NUMBER>)
+    - Feature 1
+    - Feature 2
 
-Ryan Sam (836501)
-- Feature 3
-- Feature 4
+> Emmanuel Macario (<STUDENT NUMBER>)
+    - Feature 3
+    - Feature 4
+
+> Ryan Sam (836501)
+    - Feature 5
+    - Feature 6
