@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class TerrainGen : MonoBehaviour
 {
-	/* creates a 1x1 tile of terrain with a max height of
-	0.5 and a min height of -0.5f (so the terrain is contained in
-	a 1x1x1 cube */
+	/* creates a 1x1 tile of terrain with a total height of 1 from top to 
+	bottom, with the 0 point at the waterline (so the terrain is contained
+	in a 1x1x1 cube at 0,-waterline,0) */
+	
     public int iterations = 7;
+	public float roughness = 0.5f;
 	
 	// heights where waterline = 0 and maxheight (0.5) = 1 
 	public float snowline = 0.85f;
@@ -65,10 +67,11 @@ public class TerrainGen : MonoBehaviour
 		
 		//add the vertices one by one
 		for (int i=0; i<heights.GetLength(0); i++){
-			for (int j=0; j<heights.GetLength(1); j++){				
-				vertices.Add(new Vector3(((i/(float)heights.GetLength(0))-0.5f),
-           				heights[i,j]-0.5f, (j/(float)heights.GetLength(1)-0.5f)));
-				colors.Add(getColor(heights[i,j]));
+			for (int j=0; j<heights.GetLength(1); j++){
+				float x = Mathf.InverseLerp(0, heights.GetLength(0)-4,i) - 0.5f; //no clue why -4 works
+				float y = Mathf.InverseLerp(0,heights.GetLength(1)-1,j) - 0.5f; 
+				vertices.Add(new Vector3(x, heights[i,j]- 0.5f- waterline, y));
+				colors.Add(getColor((float)heights[i,j]));
 			}
 		}
 		
@@ -111,19 +114,23 @@ public class TerrainGen : MonoBehaviour
 	
 	float[,] DiamondSquare(int depth) {
 		int size = 1+(int)Mathf.Round(Mathf.Pow(2,depth));
-		float[,] output = new float[size,size];
-		
+		double[,] output = new double[size,size];
+		float scale = 7;
 		//intitialise the corners
-		output[0,0] = this.random();
-		output[0,size-1] = this.random();
-		output[size-1,size-1] = this.random();
-		output[size-1,0] = this.random();
+		output[0,0] = this.random()*scale;
+		output[0,size-1] = this.random()*scale;
+		output[size-1,size-1] = this.random()*scale;
+		output[size-1,0] = this.random()*scale;
+		
+		//output[0,0] = output[0,size-1] = output[size-1,size-1] = output[size-1,0] =0.5;
 		
 		int iters = 0;
 		
 		while(depth > iters) {
 			int divisor = (int)Mathf.Pow(2,iters);
-			iters++;
+			iters++;			
+			scale *= roughness;	
+			
 			
 			//diamond
 			for (int i=0; i<divisor; i++){
@@ -140,7 +147,8 @@ public class TerrainGen : MonoBehaviour
 					y3 = y4 = (j+1) * (size-1)/divisor;
 					x5 = (x1+x4)/2;
 					y5 = (y1+y4)/2;
-					output[x5,y5] = (output[x1,y1] + output[x2,y2] + output[x3,y3] + output[x4,y4])/4 + this.random()/divisor;				
+					output[x5,y5] = (output[x1,y1] + output[x2,y2] + 
+					   output[x3,y3] + output[x4,y4])/4 + this.random()*scale;				
 					
 				}
 			}
@@ -171,7 +179,7 @@ public class TerrainGen : MonoBehaviour
 						
 						int[,] neighs = {{x+diff,y},{x,y+diff},
 										 {x-diff,y},{x,y-diff}};
-						float sum = 0;
+						double sum = 0;
 						int count = 0;
 						for (int n=0; n<4; n++){
 							int xx = neighs[n,0];
@@ -181,7 +189,7 @@ public class TerrainGen : MonoBehaviour
 								count++;
 							}
 						}
-						output[x,y] = sum/count + this.random()/divisor;
+						output[x,y] = sum/count + this.random()*scale;
 						
 					}
 					
@@ -193,10 +201,10 @@ public class TerrainGen : MonoBehaviour
 		return norm2dArray(output);
 	}
 	
-	float[,] norm2dArray(float[,] input) {
+	float[,] norm2dArray(double[,] input) {
 		float[,] output = new float[input.GetLength(0), input.GetLength(1)];
-		float max = 0;
-		float min = 0;
+		double max = -5;
+		double min = 5;
 		for (int i=0; i<output.GetLength(0); i++){
 			for (int j=0; j<output.GetLength(1); j++){
 				if (input[i,j] > max){
@@ -209,7 +217,7 @@ public class TerrainGen : MonoBehaviour
 		
 		for (int i=0; i<output.GetLength(0); i++){
 			for (int j=0; j<output.GetLength(1); j++){
-				output[i,j] = Mathf.InverseLerp(min, max, input[i,j]);
+				output[i,j] = Mathf.InverseLerp((float)min, (float)max, (float)input[i,j]);
 			}
 		}
 		

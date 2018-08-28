@@ -6,6 +6,9 @@ Shader "Unlit/TerrainShader"
 	{
 		Pass
 		{
+			//TODO
+			//implement lighting
+			//fix colour interpolation so it's a clean break
 			Cull Off
 
 			CGPROGRAM
