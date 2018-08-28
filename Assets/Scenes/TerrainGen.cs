@@ -8,7 +8,7 @@ public class TerrainGen : MonoBehaviour
 	bottom, with the 0 point at the waterline (so the terrain is contained
 	in a 1x1x1 cube at 0,-waterline,0) */
 	
-    public int iterations = 7;
+	public int iterations = 7;
 	public float roughness = 0.5f;
 	
 	// heights where waterline = 0 and maxheight (0.5) = 1 
@@ -34,23 +34,23 @@ public class TerrainGen : MonoBehaviour
 	
 	
 	// Use this for initialization
-    void Start()
-    {
-        // Add a MeshFilter component to this entity. This essentially comprises of a
-        // mesh definition, which in this example is a collection of vertices, colours 
-        // and triangles (groups of three vertices). 
-        MeshFilter Mesh = this.gameObject.AddComponent<MeshFilter>();
-        Mesh.mesh = this.CreateTerrain();
+	void Start()
+	{
+		// Add a MeshFilter component to this entity. This essentially comprises of a
+		// mesh definition, which in this example is a collection of vertices, colours 
+		// and triangles (groups of three vertices). 
+		MeshFilter Mesh = this.gameObject.AddComponent<MeshFilter>();
+		Mesh.mesh = this.CreateTerrain();
 		Mesh.mesh.RecalculateNormals();
 
-        // Add a MeshRenderer component. This component actually renders the mesh that
-        // is defined by the MeshFilter component.
-        MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
-        renderer.material.shader = Shader.Find("Unlit/TerrainShader");
-    }
+		// Add a MeshRenderer component. This component actually renders the mesh that
+		// is defined by the MeshFilter component.
+		MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
+		renderer.material.shader = Shader.Find("Unlit/TerrainShader");
+	}
 	
 	Mesh CreateTerrain() {
-        Mesh m = new Mesh();
+		Mesh m = new Mesh();
 		m.name = "Terrain";
 		
 		float[,] heights = this.DiamondSquare(iterations);
@@ -70,7 +70,7 @@ public class TerrainGen : MonoBehaviour
 			for (int j=0; j<heights.GetLength(1); j++){
 				float x = Mathf.InverseLerp(0, heights.GetLength(0)-4,i) - 0.5f; //no clue why -4 works
 				float y = Mathf.InverseLerp(0,heights.GetLength(1)-1,j) - 0.5f; 
-				vertices.Add(new Vector3(x, heights[i,j]- 0.5f- waterline, y));
+				 vertices.Add(new Vector3(x, heights[i,j]- 0.5f- waterline, y));
 				colors.Add(getColor((float)heights[i,j]));
 			}
 		}
@@ -122,7 +122,7 @@ public class TerrainGen : MonoBehaviour
 		output[size-1,size-1] = this.random()*scale;
 		output[size-1,0] = this.random()*scale;
 		
-		//output[0,0] = output[0,size-1] = output[size-1,size-1] = output[size-1,0] =0.5;
+		//output[0,0] = output[0,size-1] = output[size-1,size-1] = output[size-1,0] = 0.5;
 		
 		int iters = 0;
 		
