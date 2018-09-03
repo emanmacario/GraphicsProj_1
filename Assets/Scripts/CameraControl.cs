@@ -21,10 +21,10 @@ public class CameraControl : MonoBehaviour {
 
         /* Source: https://docs.unity3d.com/ScriptReference/Transform.Translate.html */
         translateMag = translateSpeed * Time.deltaTime;
-        if (Input.GetKey("a")) { tf.Translate(translateMag * Vector3.left); }
-        if (Input.GetKey("d")) { tf.Translate(translateMag * Vector3.right); }
-        if (Input.GetKey("s")) { tf.Translate(translateMag * Vector3.back); }
-        if (Input.GetKey("w")) { tf.Translate(translateMag * Vector3.forward); }
+        if (Input.GetKey("a") || Input.GetKey("a")) { tf.Translate(translateMag * Vector3.left); }
+        if (Input.GetKey("e") || Input.GetKey("d")) { tf.Translate(translateMag * Vector3.right); }
+        if (Input.GetKey("o") || Input.GetKey("s")) { tf.Translate(translateMag * Vector3.back); }
+        if (Input.GetKey(",") || Input.GetKey("w")) { tf.Translate(translateMag * Vector3.forward); }
 
     }
 
