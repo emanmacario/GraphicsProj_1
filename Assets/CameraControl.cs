@@ -18,14 +18,11 @@ public class CameraControl : MonoBehaviour {
         float dispMag = SPEED * Time.deltaTime;
         Vector3 normCamVec = this.transform.forward.normalized;
 
-        /* Vector3 sideVec = dispMag * Vector3.Cross(Vector3.up, normCamVec); */
-        /* Vector3 sideVec = dispMag * (normCamVec.y > 0) ? Vector3.Cross(normCamVec, Vector3.up) : Vector3.Cross(Vector3.down, normCamVec); */
-        /* Vector3 sideVec = dispMag * Vector3.Cross(normCamVec, Vector3.forward); */
-
+        Vector3 sideVec = dispMag * this.transform.TransformDirection(Vector3.right);
         Vector3 fwdVec = dispMag * normCamVec;
 
-        /* if (Input.GetKey("a")) { this.transform.localPosition -= sideVec; } */
-        /* if (Input.GetKey("d")) { this.transform.localPosition += sideVec; } */
+        if (Input.GetKey("a")) { this.transform.localPosition -= sideVec; }
+        if (Input.GetKey("d")) { this.transform.localPosition += sideVec; }
 
         if (Input.GetKey("s")) { this.transform.localPosition -= fwdVec; }
         if (Input.GetKey("w")) { this.transform.localPosition += fwdVec; }
