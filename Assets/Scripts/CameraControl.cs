@@ -17,7 +17,7 @@ public class CameraControl : MonoBehaviour {
         yawMag = Input.GetAxis("Mouse X") * yawSpeed;
         pitchMag = Input.GetAxis("Mouse Y") * pitchSpeed;
         tf.Rotate(-pitchMag, 0, 0);
-        tf.Rotate(0, yawMag, 0);
+        tf.Rotate(0, yawMag, 0, Space.World);
 
         /* Source: https://docs.unity3d.com/ScriptReference/Transform.Translate.html */
         translateMag = translateSpeed * Time.deltaTime;
