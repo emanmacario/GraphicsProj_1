@@ -47,6 +47,10 @@ public class TerrainGen : MonoBehaviour
 		// is defined by the MeshFilter component.
 		MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
 		renderer.material.shader = Shader.Find("Unlit/TerrainShader");
+
+        // Add MeshCollider to block camera entering terrain
+        MeshCollider collider = this.gameObject.AddComponent<MeshCollider>();
+        collider.sharedMesh = Mesh.mesh;
 	}
 	
 	Mesh CreateTerrain() {

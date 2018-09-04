@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -189,6 +189,8 @@ GameObject:
   - component: {fileID: 282840813}
   - component: {fileID: 282840811}
   - component: {fileID: 282840812}
+  - component: {fileID: 282840816}
+  - component: {fileID: 282840815}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -214,9 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190b8e5b7bec7f94c9df8509362e432d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translateSpeed: 20
-  yawSpeed: 45
-  pitchSpeed: 45
+  translateSpeed: 3
+  yawSpeed: 30
+  pitchSpeed: 30
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -266,6 +268,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 31.631002, y: 0, z: 0}
+--- !u!54 &282840815
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &282840816
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282840810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1693519466
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1178afa1a41e6fc43848a038a9f51f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 3
+  iterations: 8
   roughness: 0.49
   snowline: 0.85
   treeline: 0.72
