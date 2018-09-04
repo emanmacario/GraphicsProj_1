@@ -53,4 +53,11 @@ public class CameraControl : MonoBehaviour {
         }
     }
 
+    public void OnCollisionExit(Collision c) {
+        if (c.gameObject.name == "Terrain") {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
+
 }
