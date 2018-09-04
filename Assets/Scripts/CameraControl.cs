@@ -5,10 +5,13 @@ public class CameraControl : MonoBehaviour {
 
     public float translateSpeed=5, yawSpeed=45, pitchSpeed=45;
     private float translateMag, yawMag, pitchMag;
+    private Vector3 lastPos;
     private Transform tf;
+    private Rigidbody rb;
 
     public void Start() {
         tf = this.transform;
+        rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     public void Update() {
@@ -28,6 +31,8 @@ public class CameraControl : MonoBehaviour {
 
         boundInWorld();
 
+        lastPos = tf.localPosition;
+
     }
 
     private void boundInWorld() {
@@ -38,6 +43,14 @@ public class CameraControl : MonoBehaviour {
         y = (y < 0) ? 0 : y;
         z = (z < -sqRadius) ? -sqRadius : (sqRadius < z) ? sqRadius : z;
         tf.localPosition = new Vector3(x, y, z);
+    }
+
+    public void OnCollisionEnter(Collision c) {
+        if (c.gameObject.name == "Terrain") {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            tf.localPosition = lastPos;
+        }
     }
 
 }
