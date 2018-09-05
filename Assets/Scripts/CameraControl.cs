@@ -4,6 +4,11 @@ using System.Collections;
 public class CameraControl : MonoBehaviour {
 
     public float translateSpeed=5, yawSpeed=45, pitchSpeed=45;
+    /* Set both to true for pseudo-FlightSim style instead of FPS style */
+    public bool flightSimYaw=false, flightSimPitch=false;
+
+    private Space chosenYawSpace;
+    private int chosenPitchDirec;
     private float translateMag, yawMag, pitchMag;
     private Vector3 lastPos;
     private Transform tf;
@@ -12,15 +17,17 @@ public class CameraControl : MonoBehaviour {
     public void Start() {
         tf = this.transform;
         rb = this.gameObject.GetComponent<Rigidbody>();
+        chosenYawSpace = flightSimYaw ? Space.Self : Space.World;
+        chosenPitchDirec = flightSimPitch ? 1 : -1;
     }
 
     public void Update() {
 
         /* Source: https://docs.unity3d.com/ScriptReference/Input.GetAxis.html */
         yawMag = Input.GetAxis("Mouse X") * yawSpeed;
-        pitchMag = Input.GetAxis("Mouse Y") * pitchSpeed;
-        tf.Rotate(-pitchMag, 0, 0);
-        tf.Rotate(0, yawMag, 0, Space.World);
+        pitchMag = Input.GetAxis("Mouse Y") * pitchSpeed * chosenPitchDirec;
+        tf.Rotate(0, yawMag, 0, chosenYawSpace);
+        tf.Rotate(pitchMag, 0, 0);
 
         /* Source: https://docs.unity3d.com/ScriptReference/Transform.Translate.html */
         translateMag = translateSpeed * Time.deltaTime;
