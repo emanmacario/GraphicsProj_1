@@ -217,8 +217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translateSpeed: 3
-  yawSpeed: 30
-  pitchSpeed: 30
+  yawSpeed: 10
+  pitchSpeed: 10
+  flightSimYaw: 0
+  flightSimPitch: 0
 --- !u!20 &282840813
 Camera:
   m_ObjectHideFlags: 0
@@ -261,13 +263,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
-  m_LocalRotation: {x: 0.27254263, y: -0, z: -0, w: 0.9621437}
-  m_LocalPosition: {x: 0, y: 4.62, z: -10}
+  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
+  m_LocalPosition: {x: 0, y: 10, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 31.631002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!54 &282840815
 Rigidbody:
   m_ObjectHideFlags: 0
