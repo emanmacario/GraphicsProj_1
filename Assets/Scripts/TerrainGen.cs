@@ -72,9 +72,9 @@ public class TerrainGen : MonoBehaviour
 		//add the vertices one by one
 		for (int i=0; i<heights.GetLength(0); i++){
 			for (int j=0; j<heights.GetLength(1); j++){
-				float x = Mathf.InverseLerp(0, heights.GetLength(0)-4,i) - 0.5f; //no clue why -4 works
+				float x = Mathf.InverseLerp(0, heights.GetLength(0)-1,i) - 0.5f;
 				float y = Mathf.InverseLerp(0,heights.GetLength(1)-1,j) - 0.5f; 
-				 vertices.Add(new Vector3(x, heights[i,j]- 0.5f- waterline, y));
+				vertices.Add(new Vector3(x, heights[i,j]- 0.5f- waterline, y));
 				colors.Add(getColor((float)heights[i,j]));
 			}
 		}
