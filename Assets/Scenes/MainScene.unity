@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190b8e5b7bec7f94c9df8509362e432d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translateSpeed: 3
-  yawSpeed: 10
-  pitchSpeed: 10
+  translateSpeed: 0.5
+  yawSpeed: 1
+  pitchSpeed: 1
   flightSimYaw: 0
   flightSimPitch: 0
 --- !u!20 &282840813
