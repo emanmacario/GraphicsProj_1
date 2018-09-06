@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class WaterGenerator : MonoBehaviour {
 
+    /* Choose manually created Sun which interacts with water */
+    public Sun sun;
 	public int size;
 	public Material material;
+
+    private MeshRenderer renderer;
 
 	// Use this for initialization
 	void Start() {
@@ -13,10 +17,12 @@ public class WaterGenerator : MonoBehaviour {
 		// Add a MeshFilter component to this entity
 		MeshFilter mesh = this.gameObject.AddComponent<MeshFilter>();
 		mesh.mesh = this.CreateMesh();
+        mesh.mesh.RecalculateNormals();
 
 		// Add a MeshRenderer component
-		MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
+		renderer = this.gameObject.AddComponent<MeshRenderer>();
 		renderer.material = material;
+		renderer.material.shader = Shader.Find("Unlit/PhongShader");
 
 	}
 
