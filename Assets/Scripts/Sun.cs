@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
 public class Sun : MonoBehaviour {
 
-    public float period=8, orbitRadius=10;
+	public Color color;
+    public float period, orbitRadius;
     private float time, timeToRads, timeToDegs, rads, degs;
     private Transform tf;
 
@@ -24,5 +25,9 @@ public class Sun : MonoBehaviour {
         tf.localPosition = orbitRadius * new Vector3((float) Math.Cos(rads), (float) Math.Sin(rads), 0);
         tf.rotation = Quaternion.AngleAxis(degs, Vector3.forward);
     }
+
+	public Vector3 GetWorldPosition() {
+		return this.tf.position;
+	}
 
 }

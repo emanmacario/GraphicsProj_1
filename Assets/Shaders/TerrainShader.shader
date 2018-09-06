@@ -1,4 +1,4 @@
-﻿/* Phong Shading heavily based on Lab 5 code */
+/* Phong Shading heavily based on Lab 5 code */
 
 //UNITY_SHADER_NO_UPGRADE
 
@@ -42,6 +42,7 @@ Shader "Unlit/TerrainShader"
                 float3 worldNormal : TEXCOORD1;
 			};
 
+			
 			// Implementation of the vertex shader
 			vertOut vert(vertIn v)
 			{
@@ -54,50 +55,54 @@ Shader "Unlit/TerrainShader"
 				float4 worldVertex = mul(unity_ObjectToWorld, v.vertex);
 				float3 worldNormal = normalize(mul(transpose((float3x3)unity_WorldToObject), v.normal.xyz));
 
-				// AMBIENT LIGHT
-				float Ka = 1;
-				float3 amb = v.color.rgb * UNITY_LIGHTMODEL_AMBIENT.rgb * Ka;
-
-                // DIFFUSE LIGHT
-				float fAtt = 1;
-				float Kd = 1;
-				float3 L = normalize(_PointLightPosition - worldVertex.xyz);
-                // Save L.N for reuse, calculate reflected ray for specular
-				float LdotN = dot(L, worldNormal.xyz);
-				float3 dif = fAtt * _PointLightColor.rgb * Kd * v.color.rgb * saturate(LdotN);
-
-				/* NEW SPECULAR SHADER (PHONG) */
-				float Ks = 1;
-				float specN = 5; // Values>>1 give tighter highlights
-				float3 V = normalize(_WorldSpaceCameraPos - worldVertex.xyz);
-                float3 R = 2.0f * dot(worldNormal, L) * worldNormal - L;
-				float3 spe = fAtt * _PointLightColor.rgb * Ks * pow(saturate(dot(V, R)), specN);
-
-				// Combine Phong illumination model components
-				o.color.rgb = amb.rgb + dif.rgb + spe.rgb;
-				o.color.a = v.color.a;
-
-				// Transform vertex in world coordinates to camera coordinates
+				// Transform vertex in world coordinates to camera coordinates, and pass colour
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.color = v.color;
 
-                // NEED TO SEND VERTEX INFO TO PIXEL SHADER TO IMPLEMENT PHONG!
-                o.worldVertex = worldVertex;
-                o.worldNormal = worldNormal;
+				// Pass out the world vertex position and world normal to be interpolated
+				// in the fragment shader (and utilised)
+				o.worldVertex = worldVertex;
+				o.worldNormal = worldNormal;
 
 				return o;
 			}
-			
+
+
 			// Implementation of the fragment shader
 			fixed4 frag(vertOut v) : SV_Target
 			{
-                float3 wV = v.worldVertex;
-                float3 wN = v.worldNormal;
-                fixed4 col = v.color * dot(wV, wN);
-				return col;
+				// Our interpolated normal might not be of length 1
+				float3 interpNormal = normalize(v.worldNormal);
+
+				// Calculate ambient RGB intensities
+				float Ka = 0.35;
+				float3 amb = v.color.rgb * UNITY_LIGHTMODEL_AMBIENT.rgb * Ka;
+
+				// Calculate diffuse RBG reflections, we save the results of L.N because we will use it again
+				// (when calculating the reflected ray in our specular component)
+				float fAtt = 0.6;
+				float Kd = 0.8;
+				float3 L = normalize(_PointLightPosition - v.worldVertex.xyz);
+				float LdotN = dot(L, interpNormal);
+				float3 dif = fAtt * _PointLightColor.rgb * Kd * v.color.rgb * saturate(LdotN);
+
+				// Calculate specular reflections
+				float Ks = 0.5;
+				float specN = 0.2; // Values>>1 give tighter highlights
+				float3 V = normalize(_WorldSpaceCameraPos - v.worldVertex.xyz);
+				// Using classic reflection calculation:
+				float3 R = normalize((2.0 * LdotN * interpNormal) - L);
+				float3 spe = fAtt * _PointLightColor.rgb * Ks * pow(saturate(dot(V, R)), specN);
+	
+
+				// Combine Phong illumination model components
+				float4 returnColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
+				returnColor.rgb = amb.rgb + dif.rgb + spe.rgb;
+				returnColor.a = v.color.a;
+
+				return returnColor;
 			}
-
 			ENDCG
-
 		}
 	}
 }

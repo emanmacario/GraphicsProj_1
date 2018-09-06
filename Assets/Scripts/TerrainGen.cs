@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +7,9 @@ public class TerrainGen : MonoBehaviour
 	/* creates a 1x1 tile of terrain with a total height of 1 from top to 
 	bottom, with the 0 point at the waterline (so the terrain is contained
 	in a 1x1x1 cube at 0,-waterline,0) */
-	
+
+	public Shader shader;
+	public Sun sun;
 	public int iterations = 7;
 	public float roughness = 0.5f;
 	
@@ -16,7 +18,6 @@ public class TerrainGen : MonoBehaviour
 	public float treeline = 0.72f;
 	public float highlands = 0.35f;
 	public float beach = 0.05f;
-	
 	public float waterline = 0f;
 	
 	 
@@ -46,13 +47,22 @@ public class TerrainGen : MonoBehaviour
 		// Add a MeshRenderer component. This component actually renders the mesh that
 		// is defined by the MeshFilter component.
 		MeshRenderer renderer = this.gameObject.AddComponent<MeshRenderer>();
-		renderer.material.shader = Shader.Find("Unlit/TerrainShader");
+		renderer.material.shader = shader;
 
         // Add MeshCollider to block camera entering terrain
         MeshCollider collider = this.gameObject.AddComponent<MeshCollider>();
         collider.sharedMesh = Mesh.mesh;
 	}
-	
+
+	void Update() {
+		// Get renderer component (in order to pass params to shader)
+		MeshRenderer renderer = this.gameObject.GetComponent<MeshRenderer>();
+
+		// Pass updated light positions to shader
+		renderer.material.SetColor("_PointLightColor", this.sun.color);
+		renderer.material.SetVector("_PointLightPosition", this.sun.GetWorldPosition());
+	}
+
 	Mesh CreateTerrain() {
 		Mesh m = new Mesh();
 		m.name = "Terrain";
