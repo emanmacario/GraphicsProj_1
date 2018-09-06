@@ -38,8 +38,6 @@ Shader "Unlit/PhongShader"
 			{
 				float4 vertex : SV_POSITION;
 				float4 color : COLOR;
-                float4 worldVertex : TEXCOORD0;
-                float3 worldNormal : TEXCOORD1;
 			};
 
 			// Implementation of the vertex shader
@@ -81,20 +79,13 @@ Shader "Unlit/PhongShader"
 				// Transform vertex in world coordinates to camera coordinates
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 
-                // PIXEL SHADER NEEDS THESE VECTORS
-                o.worldVertex = worldVertex;
-                o.worldNormal = worldNormal;
-
 				return o;
 			}
 			
 			// Implementation of the fragment shader
 			fixed4 frag(vertOut v) : SV_Target
 			{
-                float3 wV = v.worldVertex;
-                float3 wN = v.worldNormal;
-                fixed4 col = v.color * dot(wV, wN);
-				return col;
+                return v.color;
 			}
 
 			ENDCG
