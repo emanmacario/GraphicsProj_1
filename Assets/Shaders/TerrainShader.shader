@@ -6,8 +6,8 @@ Shader "Unlit/TerrainShader"
 {
 	Properties
 	{
-		_PointLightColor ("Point Light Color", Color) = (0, 0, 0)
-		_PointLightPosition ("Point Light Position", Vector) = (0.0, 0.0, 0.0)
+        _SunColor ("Sun Color", Color) = (0, 0, 0)
+        _SunDirec ("Sun Direc", Vector) = (-1, 0, 0)
 	}
 	SubShader
 	{
@@ -24,8 +24,8 @@ Shader "Unlit/TerrainShader"
 
 			#include "UnityCG.cginc"
 
-			uniform float3 _PointLightColor;
-			uniform float3 _PointLightPosition;
+			uniform float3 _SunColor;
+			uniform float3 _SunDirec;
 
 			struct vertIn
 			{
@@ -61,26 +61,27 @@ Shader "Unlit/TerrainShader"
                 // DIFFUSE LIGHT
 				float fAtt = 1;
 				float Kd = 1;
-				float3 L = normalize(_PointLightPosition - worldVertex.xyz);
+                /* Directional => parallel, reverse direc as _SunDirec is OPPOSITE of light direc from vertex */
+				float3 L = normalize(-1 * _SunDirec);
                 // Save L.N for reuse, calculate reflected ray for specular
 				float LdotN = dot(L, worldNormal.xyz);
-				float3 dif = fAtt * _PointLightColor.rgb * Kd * v.color.rgb * saturate(LdotN);
+				float3 dif = fAtt * _SunColor.rgb * Kd * v.color.rgb * saturate(LdotN);
 
-				/* NEW SPECULAR SHADER (PHONG) */
+				// SPECULAR LIGHT
 				float Ks = 1;
 				float specN = 5; // Values>>1 give tighter highlights
 				float3 V = normalize(_WorldSpaceCameraPos - worldVertex.xyz);
-                float3 R = 2.0f * dot(worldNormal, L) * worldNormal - L;
-				float3 spe = fAtt * _PointLightColor.rgb * Ks * pow(saturate(dot(V, R)), specN);
+                float3 R = 2.0f * LdotN * worldNormal - L;
+				float3 spe = fAtt * _SunColor.rgb * Ks * pow(saturate(dot(V, R)), specN);
 
-				// Combine Phong illumination model components
+				// COMBINE PHONG
 				o.color.rgb = amb.rgb + dif.rgb + spe.rgb;
 				o.color.a = v.color.a;
 
 				// Transform vertex in world coordinates to camera coordinates
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 
-                // NEED TO SEND VERTEX INFO TO PIXEL SHADER TO IMPLEMENT PHONG!
+                // PIXEL SHADER NEEDS THESE VECTORS
                 o.worldVertex = worldVertex;
                 o.worldNormal = worldNormal;
 
