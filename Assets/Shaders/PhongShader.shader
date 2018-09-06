@@ -66,8 +66,8 @@ Shader "Unlit/PhongShader"
 				float3 dif = fAtt * _SunColor.rgb * Kd * v.color.rgb * saturate(LdotN);
 
 				// SPECULAR LIGHT
-				float Ks = 1;
-				float specN = 5; // Values>>1 give tighter highlights
+				float Ks = 0;
+				float specN = 0; // Values>>1 give tighter highlights
 				float3 V = normalize(_WorldSpaceCameraPos - worldVertex.xyz);
                 float3 R = 2.0f * LdotN * worldNormal - L;
 				float3 spe = fAtt * _SunColor.rgb * Ks * pow(saturate(dot(V, R)), specN);
