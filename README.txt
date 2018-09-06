@@ -3,10 +3,6 @@ Briefly describe overall implementation, esp. Unity terrain generation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
-
-
-
 > Camera
 
     - The player flies around the landscape using FPS style yawing by default
@@ -19,3 +15,13 @@ Briefly describe overall implementation, esp. Unity terrain generation
 
     - The lighting shader implements Gouraud shading on the Phong illumination model
     - The sun has customisable period and radius of orbit
+
+
+> Water & Waves
+
+    - The water plane is dynamically generated in run-time via the 'WaterGenerator' script
+    - The waves effect is implemented by a custom unlit HLSL shader
+    - Compound sine waves are used to displace vertexes in model space
+    - Two different compound sine waves are used, with varying amplitude and wavelength
+    - One sine wave is used for each of the x and z axis, respectively
+    - The phases of the waves changes with respect to time
