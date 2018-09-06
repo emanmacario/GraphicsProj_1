@@ -2,7 +2,7 @@
     - Terrain generation
     - Terrain colouring
 
-> Emmanuel Macario (<STUDENT NUMBER>)
+> Emmanuel Macario (831659)
     - Water
     - Waves
 
