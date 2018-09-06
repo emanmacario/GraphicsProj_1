@@ -17,7 +17,6 @@ public class WaterGenerator : MonoBehaviour {
 		// Add a MeshFilter component to this entity
 		MeshFilter mesh = this.gameObject.AddComponent<MeshFilter>();
 		mesh.mesh = this.CreateMesh();
-        mesh.mesh.RecalculateNormals();
 
 		// Add a MeshRenderer component
 		renderer = this.gameObject.AddComponent<MeshRenderer>();
