@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7303b785430b51a4a867911b75c5ba98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sun: {fileID: 0}
   size: 100
   material: {fileID: 2100000, guid: 24b9f2f996d80ea4c8302ad6d8a05067, type: 2}
 --- !u!1 &2071704368
@@ -356,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e958048ed72ff848a5dd403ea7764c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0.9869896, b: 0.7216981, a: 0}
-  period: 8
+  color: {r: 1, g: 0.98307437, b: 0.73333335, a: 0}
+  period: 24
   orbitRadius: 10
 --- !u!23 &2071704370
 MeshRenderer:
@@ -374,7 +375,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c29408f05ea660445a432cf2ed18e169, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -409,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 2071704368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
