@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e958048ed72ff848a5dd403ea7764c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 1, g: 0, b: 0, a: 0}
   period: 8
   orbitRadius: 10
 --- !u!23 &2071704370

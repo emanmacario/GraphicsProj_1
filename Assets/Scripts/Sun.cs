@@ -4,9 +4,13 @@ using System;
 
 public class Sun : MonoBehaviour {
 
+    public Color color;
     public float period=8, orbitRadius=10;
     private float time, timeToRads, timeToDegs, rads, degs;
     private Transform tf;
+
+    public Vector3 getWorldPos() { return tf.position; }
+    public Vector3 getWorldDirec() { return tf.TransformDirection(Vector3.left); }
 
     public void Start() {
         time = 0;
