@@ -22,7 +22,6 @@ public class WaterGenerator : MonoBehaviour {
 		// Add a MeshRenderer component
 		renderer = this.gameObject.AddComponent<MeshRenderer>();
 		renderer.material = material;
-		renderer.material.shader = Shader.Find("Unlit/PhongShader");
 
 	}
 
