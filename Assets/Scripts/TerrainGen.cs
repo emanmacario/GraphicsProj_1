@@ -51,7 +51,7 @@ public class TerrainGen : MonoBehaviour
 		// Add a MeshRenderer component. This component actually renders the mesh that
 		// is defined by the MeshFilter component.
 		renderer = this.gameObject.AddComponent<MeshRenderer>();
-		renderer.material.shader = Shader.Find("Unlit/TerrainShader");
+		renderer.material.shader = Shader.Find("Unlit/PhongShader");
 
         // Add MeshCollider to block camera entering terrain
         MeshCollider collider = this.gameObject.AddComponent<MeshCollider>();
