@@ -31,12 +31,11 @@ public class WaterGenerator : MonoBehaviour {
 		List<Color> colors = new List<Color>();
 
 		// Define the vertices and colors array
-		int half = size / 2;
 		for (int x = 0; x < size+1; x++)
 		{
 			for (int z = 0; z < size+1; z++)
 			{
-				vertices.Add(new Vector3(x-half, 0.0f, z-half));
+				vertices.Add(new Vector3(x, 0.0f, z));
 				colors.Add(Color.black);
 			}
 		}
