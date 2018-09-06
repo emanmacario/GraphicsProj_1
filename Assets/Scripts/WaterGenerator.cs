@@ -32,11 +32,11 @@ public class WaterGenerator : MonoBehaviour {
 
 		// Define the vertices and colors array
 		int half = size / 2;
-		for (int x = 0; x < size; x++)
+		for (int x = 0; x < size+1; x++)
 		{
-			for (int z = 0; z < size; z++)
+			for (int z = 0; z < size+1; z++)
 			{
-				vertices.Add(new Vector3(x, 0.0f, z));
+				vertices.Add(new Vector3(x-half, 0.0f, z-half));
 				colors.Add(Color.black);
 			}
 		}
@@ -44,14 +44,14 @@ public class WaterGenerator : MonoBehaviour {
 		// Define the triangles array, appending
 		// two sets of triangles denoting one quad
 		// at a time
-		for (int x = 0; x < size - 1; x++)
+		for (int x = 0; x < size; x++)
 		{
-			for (int z = 0; z < size - 1; z++)
+			for (int z = 0; z < size; z++)
 			{
 				// Calculate quad corner indices
-				int topLeft = x * size + z;
+				int topLeft = x * (size+1) + z;
 				int topRight = topLeft + 1;
-				int bottomLeft = (x + 1) * size + z;
+				int bottomLeft = (x + 1) * (size+1) + z;
 				int bottomRight = bottomLeft + 1;
 
 				// Add first triangle
