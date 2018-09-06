@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1178afa1a41e6fc43848a038a9f51f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sun: {fileID: 2071704369}
   iterations: 7
   roughness: 0.49
   snowline: 0.85
