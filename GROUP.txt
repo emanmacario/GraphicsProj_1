@@ -1,13 +1,11 @@
-Add usernames, student numbers, indiv contributions to project
-
 > Adam Basile (<STUDENT NUMBER>)
-    - Feature 1
-    - Feature 2
+    - Terrain generation
+    - Terrain colouring
 
 > Emmanuel Macario (<STUDENT NUMBER>)
-    - Feature 3
-    - Feature 4
+    - Water
+    - Waves
 
 > Ryan Sam (836501)
-    - Feature 5
-    - Feature 6
+    - Camera
+    - Lighting
