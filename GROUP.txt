@@ -1,4 +1,4 @@
-> Adam Basile (<STUDENT NUMBER>)
+> Adam Basile (841455)
     - Terrain generation
     - Terrain colouring
 
