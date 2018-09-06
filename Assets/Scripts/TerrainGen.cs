@@ -59,10 +59,8 @@ public class TerrainGen : MonoBehaviour
 	}
 
     void Update() {
-        /* renderer.material.SetColor("_PointLightColor", this.pointLight.color); */
-        /* renderer.material.SetVector("_PointLightPosition", this.pointLight.GetWorldPosition()); */
         renderer.material.SetColor("_SunColor", sun.color);
-        renderer.material.SetVector("_SunPos", sun.getWorldPos());
+        renderer.material.SetVector("_SunDirec", sun.getSunDirec());
     }
 
 	Mesh CreateTerrain() {

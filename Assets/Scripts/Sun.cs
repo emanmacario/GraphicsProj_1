@@ -10,7 +10,7 @@ public class Sun : MonoBehaviour {
     private Transform tf;
 
     public Vector3 getWorldPos() { return tf.position; }
-    public Vector3 getWorldDirec() { return tf.TransformDirection(Vector3.left); }
+    public Vector3 getSunDirec() { return tf.TransformDirection(Vector3.left); }
 
     public void Start() {
         time = 0;
