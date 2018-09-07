@@ -10,6 +10,7 @@ Briefly describe overall implementation, esp. Unity terrain generation
 - The mesh generated is linearly interpolated to be within a unit cube with the waterline at height 0
 - Colours are assigned to vertices according to their height above the waterline
 - Waterline height, the heights for different colours, and the colours themselves are all configurable values
+- The code for TerrainGen was developed from a boilerplate adapted from a lab solution for procedurally generating meshes
 
 ## Camera
 
@@ -22,6 +23,7 @@ Briefly describe overall implementation, esp. Unity terrain generation
 ## Lighting
 
 - The lighting shader implements Gouraud shading on the Phong illumination model
+- It is heavily based off te code given to us in labs
 - No specular component is used, as real life terrain is not shiny
 - The sun has customisable period and radius of orbit
 - Despite appearing close to the landscape, the sun is implemented as a directional light
