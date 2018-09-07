@@ -1,4 +1,4 @@
-> Adam Basile (841455)
+> Adam Basile (abasile, 841455)
     - Terrain generation
     - Terrain colouring
 
