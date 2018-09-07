@@ -2,10 +2,10 @@
     - Terrain generation
     - Terrain colouring
 
-> Emmanuel Macario (831659)
+> Emmanuel Macario (macarioe, 831659)
     - Water
     - Waves
 
-> Ryan Sam (836501)
+> Ryan Sam (rsam1, 836501)
     - Camera
     - Lighting
