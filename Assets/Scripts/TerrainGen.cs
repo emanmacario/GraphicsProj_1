@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//code adapted from a boilerplate given in labs
+
 public class TerrainGen : MonoBehaviour
 {
 
@@ -15,7 +17,7 @@ public class TerrainGen : MonoBehaviour
 	public int iterations = 7;
 	public float roughness = 0.5f;
 	
-	// heights where waterline = 0 and maxheight (0.5) = 1 
+	// heights where waterline = 0 and maxheight = 1 
 	public float snowline = 0.85f;
 	public float treeline = 0.72f;
 	public float highlands = 0.35f;
@@ -83,7 +85,8 @@ public class TerrainGen : MonoBehaviour
 		for (int i=0; i<heights.GetLength(0); i++){
 			for (int j=0; j<heights.GetLength(1); j++){
 				float x = Mathf.InverseLerp(0, heights.GetLength(0)-1,i) - 0.5f;
-				float y = Mathf.InverseLerp(0,heights.GetLength(1)-1,j) - 0.5f; 
+				float y = Mathf.InverseLerp(0,heights.GetLength(1)-1,j) - 0.5f;
+				
 				vertices.Add(new Vector3(x, heights[i,j]- 0.5f- waterline, y));
 				colors.Add(getColor((float)heights[i,j]));
 			}
@@ -126,6 +129,9 @@ public class TerrainGen : MonoBehaviour
 		return sand;
 	}
 	
+	
+	//return a diamond-square generated heightmap array 
+	//constrained/stretched to [-1,1]
 	float[,] DiamondSquare(int depth) {
 		int size = 1+(int)Mathf.Round(Mathf.Pow(2,depth));
 		double[,] output = new double[size,size];
@@ -238,6 +244,7 @@ public class TerrainGen : MonoBehaviour
 		return output;
 	}
 	
+	//return random value on [-0.5,0.5]
 	float random(){
 		return Random.value-0.5f;
 	}
