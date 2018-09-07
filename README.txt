@@ -1,6 +1,4 @@
-Briefly describe overall implementation, esp. Unity terrain generation
-"Several paragraphs of text are sufficient, and concise descrips preferred to long descrips"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Project Description
 
 ## Terrain
 
@@ -23,8 +21,8 @@ Briefly describe overall implementation, esp. Unity terrain generation
 ## Lighting
 
 - The lighting shader implements Gouraud shading on the Phong illumination model
-- It is heavily based off te code given to us in labs
-- No specular component is used, as real life terrain is not shiny
+- It is heavily derived from the given Lab 5 code
+- Turned off specular lighting to avoid shiny terrain
 - The sun has customisable period and radius of orbit
 - Despite appearing close to the landscape, the sun is implemented as a directional light
 
